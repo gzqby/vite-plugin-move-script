@@ -14,6 +14,14 @@
     "inject",
     "body"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gzqby/vite-plugin-move-script"
+  },
+  "bugs": {
+    "url": "https://github.com/gzqby/vite-plugin-move-script"
+  },
+  "homepage": "https://github.com/gzqby/vite-plugin-move-script#readme",
   "author": "gzq",
   "license": "ISC",
   "dependencies": {
