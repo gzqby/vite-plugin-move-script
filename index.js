@@ -1,7 +1,7 @@
-import posthtml from "posthtml";
-import { readFileSync, writeFileSync } from "fs";
-import { resolve } from "path";
-import { render } from "posthtml-render";
+const posthtml = require("posthtml");
+const { readFileSync, writeFileSync } = require( "fs");
+const { resolve } = require("path");
+const { render } = require("posthtml-render");
 
 const loop = ({ array, flag, tags }) => {
   let insertIndex;
@@ -50,12 +50,16 @@ const handler = (array) => {
   loop({ array, tags });
 };
 
-export const moveScript = () => {
+const moveScript = () => {
+  let outputDir;
   return {
     name: "vite-plugin-move-script",
     apply: "build",
+    configResolved(config) {
+      outputDir = config.build.outDir || 'dist';
+    },
     closeBundle() {
-      const indexPath = resolve(__dirname, "dist/index.html");
+      const indexPath = resolve(outputDir, "index.html");
       const html = readFileSync(indexPath, "utf-8");
       posthtml()
         .process(html)
@@ -68,3 +72,5 @@ export const moveScript = () => {
     },
   };
 };
+
+module.exports = moveScript;
